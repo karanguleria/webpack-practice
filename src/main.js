@@ -1,1 +1,1 @@
-alert("Hello you have build a webpack");
+alert("Created a dedicated configuration file.");
