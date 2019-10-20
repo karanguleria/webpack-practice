@@ -2,6 +2,7 @@ var webpack = require('webpack');
 var path = require('path');
 
 module.exports = {
+        mode: 'development',
         entry : './src/main.js',
         output: {
             path: path.resolve('./dist'),
@@ -12,6 +13,11 @@ module.exports = {
                 {
                     test: /\.css$/,
                     use: ['style-loader','css-loader']
+                },
+                {
+                    test: /\.js$/,
+                    exclude: /node_modules/,
+                    loader: "babel-loader"
                 }
             ]
         }
