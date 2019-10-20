@@ -1,0 +1,24 @@
+{
+  "name": "webpack-practice",
+  "version": "1.0.0",
+  "description": "Learing webpack",
+  "main": "index.js",
+  "scripts": {
+    "build": "webpack src/main.js dist/main.js"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/karanguleria/webpack-practice.git"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/karanguleria/webpack-practice/issues"
+  },
+  "homepage": "https://github.com/karanguleria/webpack-practice#readme",
+  "devDependencies": {
+    "webpack": "^4.41.2",
+    "webpack-cli": "^3.3.9"
+  }
+}
