@@ -1,5 +1,7 @@
 var webpack = require('webpack');
 var path = require('path');
+var inProduction = (process.env.NODE_ENV === 'production');
+const UglifyJsPlugin = require('uglifyjs-webpack-plugin');
 
 module.exports = {
         mode: 'development',
@@ -8,6 +10,11 @@ module.exports = {
             path: path.resolve('./dist'),
             filename: 'main.js'
         },
+        optimization: {
+            minimizer: [new UglifyJsPlugin({
+                test: /\.js(\?.*)?$/i,
+            })],
+          },
         module: {
             rules:[
                 {
@@ -18,7 +25,11 @@ module.exports = {
                     test: /\.js$/,
                     exclude: /node_modules/,
                     loader: "babel-loader"
-                }
+                },
             ]
-        }
+        },
+        
+        //   plugins:[
+        //       new webpack.optimize.UglifyJsPlugin()
+        //   ]
 }
