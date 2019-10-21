@@ -2,13 +2,20 @@ var webpack = require('webpack');
 var path = require('path');
 var inProduction = (process.env.NODE_ENV === 'production');
 const UglifyJsPlugin = require('uglifyjs-webpack-plugin');
+const MiniCssExtractPlugin = require('mini-css-extract-plugin');
 
 module.exports = {
         mode: 'development',
-        entry : './src/main.js',
+        entry : {
+                    app:
+                    [
+                        './src/main.js',
+                        './src/main.css'
+                    ]
+                },
         output: {
             path: path.resolve('./dist'),
-            filename: 'main.js'
+            filename: '[name].js'
         },
         optimization: {
             minimizer: [new UglifyJsPlugin({
@@ -17,13 +24,24 @@ module.exports = {
           },
         module: {
             rules:[
-                {
-                    test: /\.s[ac]ss$/,
-                    use:['sass-loader']
-                },
+                // {
+                //     test: /\.s[ac]ss$/,
+                //     use:['sass-loader']
+                // },
                 {
                     test: /\.css$/,
-                    use: ['style-loader','css-loader']
+                    use: [
+                        {
+                          loader: MiniCssExtractPlugin.loader,
+                          options: {
+                            // you can specify a publicPath here
+                            // by default it uses publicPath in webpackOptions.output
+                            publicPath: './dist',
+                            hmr: process.env.NODE_ENV === 'development',
+                          },
+                        },
+                        'css-loader',
+                      ],
                 },
                 {
                     test: /\.js$/,
@@ -33,7 +51,16 @@ module.exports = {
             ]
         },
         
-        //   plugins:[
-        //       new webpack.optimize.UglifyJsPlugin()
-        //   ]
+         plugins:[
+            new MiniCssExtractPlugin({
+                // Options similar to the same options in webpackOptions.output
+                // all options are optional
+                filename: '[name].css',
+                chunkFilename: '[id].css',
+                ignoreOrder: false, // Enable to remove warnings about conflicting order
+              }),
+              new webpack.LoaderOptionsPlugin({
+                minimize: true,
+              }),
+           ]
 }

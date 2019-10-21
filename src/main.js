@@ -1,5 +1,5 @@
 //ES2015 Compilation with bable
-require('./main.scss');
+// require('./main.css');
 // class form {
 //     constructor(){
 //         alert("Yeh form classes are awsome no mater what the browser is ");
