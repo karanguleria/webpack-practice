@@ -7,6 +7,8 @@ const UglifyJsPlugin = require('uglifyjs-webpack-plugin');
 const TerserJSPlugin = require('terser-webpack-plugin');
 const MiniCssExtractPlugin = require('mini-css-extract-plugin');
 const OptimizeCSSAssetsPlugin = require('optimize-css-assets-webpack-plugin');
+const { CleanWebpackPlugin } = require('clean-webpack-plugin');
+
 module.exports = {
         mode: 'development',
         entry : {
@@ -14,11 +16,12 @@ module.exports = {
                     [
                         './src/main.js',
                         './src/main.css'
-                    ]
+                    ],
+                    vendor :['jQuery']
                 },
         output: {
             path: path.resolve('./dist'),
-            filename: '[name].js'
+            filename: '[name].[chunkhash].js'
         },
         optimization: {
           minimizer: [new TerserJSPlugin({}), new OptimizeCSSAssetsPlugin({})],
@@ -46,13 +49,14 @@ module.exports = {
         
          plugins:[
           new MiniCssExtractPlugin({
-            filename: '[name].css',
+            filename: '[name].[chunkhash].css',
             chunkFilename: '[id].css',
           }),
           new PurifyCSSPlugin({
             // Give paths to parse for rules. These should be absolute!
             paths: glob.sync(path.join(__dirname, 'index.html')),
           }),
+          new CleanWebpackPlugin(),
         
               new webpack.LoaderOptionsPlugin({
                 minimize: inProduction,

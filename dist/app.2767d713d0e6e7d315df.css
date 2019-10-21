@@ -1,0 +1,12 @@
+body {
+  background-color: aqua;
+  background: url("/images/Image .jpeg");
+}
+
+.two {
+  padding: 10px;
+}
+
+div > h1 {
+  font-size: 1001px;
+}
