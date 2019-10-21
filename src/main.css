@@ -2,3 +2,12 @@ body{
     background-color: aqua;
     background: url('./images/Image .jpeg');
 }
+.one {
+    max-width: 100px;
+}
+.two {
+    padding: 10px;
+}
+div > h1{
+font-size: 10px;
+}

@@ -1,5 +1,7 @@
 var webpack = require('webpack');
+const glob = require('glob');
 var path = require('path');
+const PurifyCSSPlugin = require('purifycss-webpack');
 var inProduction = (process.env.NODE_ENV === 'production');
 const UglifyJsPlugin = require('uglifyjs-webpack-plugin');
 const TerserJSPlugin = require('terser-webpack-plugin');
@@ -47,9 +49,13 @@ module.exports = {
             filename: '[name].css',
             chunkFilename: '[id].css',
           }),
+          new PurifyCSSPlugin({
+            // Give paths to parse for rules. These should be absolute!
+            paths: glob.sync(path.join(__dirname, 'index.html')),
+          }),
         
               new webpack.LoaderOptionsPlugin({
-                minimize: true,
+                minimize: inProduction,
               }),
            ]
 }
