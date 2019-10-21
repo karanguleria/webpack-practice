@@ -25,28 +25,15 @@ module.exports = {
             rules:[
               {
                 test: /\.css$/,
-                use: [MiniCssExtractPlugin.loader, 'css-loader'],
+                use: ['raw-loader',MiniCssExtractPlugin.loader, 'css-loader'],
               },
-                // {
-                //     test: /\.s[ac]ss$/,
-                //     use:['sass-loader']
-                // },
-                // {
-                //     test: /\.css$/,
-                //     use: [
-                //         {
-                //           loader: MiniCssExtractPlugin.loader,
-                //           options: {
-                //             // url:false,
-                //             // you can specify a publicPath here
-                //             // by default it uses publicPath in webpackOptions.output
-                //             publicPath: './dist',
-                //             hmr: process.env.NODE_ENV === 'development',
-                //           },
-                //         },
-                //         'css-loader',
-                //       ],
-                // },
+              {
+                test: /\.(png|jpe?g|gif|svg|eot|ttf|woff|woff2)$/i,
+               loader :'file-loader',
+               options:{
+                 name:'/images/[name].[ext]'
+               }
+              },
                 {
                     test: /\.js$/,
                     exclude: /node_modules/,
